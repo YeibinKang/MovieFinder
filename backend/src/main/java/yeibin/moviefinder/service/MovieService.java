@@ -30,4 +30,8 @@ public class MovieService {
         return tmdbClient.getMovieById(tmdbId);
     }
 
+    public TMDBMovieListDTO searchMoviesByTitle(String title){
+        return tmdbClient.searchMoviesByTitle(title);
+    }
+
 }

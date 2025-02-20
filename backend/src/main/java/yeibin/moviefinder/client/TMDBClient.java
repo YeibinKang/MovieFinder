@@ -30,8 +30,7 @@ public class TMDBClient {
 
 
     //Get Now playing movies
-        //return list of movies within Mono (TMDBMovieDTO type)
-
+    //Return a list of now playing movies
     public TMDBMovieListDTO getNowPlayingMovies() {
         try {
             String rawResponse = webClient.get()
@@ -58,7 +57,8 @@ public class TMDBClient {
         }
     }
 
-    //movie with tmdb_id (for movie details)
+    // Search a movie by TMDB id
+    // Return a movie with details
     public TMDBMovieDTO getMovieById(Long tmdbId){
         try{
             System.out.println("Attempting to request movie with ID: " + tmdbId);
@@ -96,7 +96,31 @@ public class TMDBClient {
         }
     }
 
-    //movies with string
+    // Search a movie list with a string
+    // Return a list of movies which matched with the string
+    public TMDBMovieListDTO searchMoviesByTitle(String title){
+        try{
 
+            TMDBMovieListDTO response = webClient.get()
+                    .uri(uriBuilder -> uriBuilder
+                            .path("/search/movie")
+                            .queryParam("query", title)
+                            .queryParam("api_key", apiKey)
+                            .build()
+                    )
+                    .retrieve()
+                    .bodyToMono(TMDBMovieListDTO.class)
+                    .block();
+
+            return response;
+
+
+
+        } catch (Exception e) {
+            System.out.println("Error occured: " + e.getMessage());
+            e.printStackTrace();
+            return null;
+        }
+    }
 
 }

@@ -2,10 +2,7 @@ package yeibin.moviefinder.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import yeibin.moviefinder.model.dto.tmdb.TMDBMovieDTO;
 import yeibin.moviefinder.model.dto.tmdb.TMDBMovieListDTO;
 import yeibin.moviefinder.service.MovieService;
@@ -29,6 +26,11 @@ public class MovieController {
     @GetMapping("/{tmdbId}")
     public TMDBMovieDTO getMovieById(@PathVariable("tmdbId") Long tmdbId){
         return movieService.getMovieById(tmdbId);
+    }
+
+    @GetMapping("/search")
+    public TMDBMovieListDTO searchMoviesByTitle(@RequestParam String title){
+        return movieService.searchMoviesByTitle(title);
     }
 
 
