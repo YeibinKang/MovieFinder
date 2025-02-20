@@ -1,4 +1,4 @@
-package yeibin.MovieFinder;
+package yeibin.moviefinder;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
